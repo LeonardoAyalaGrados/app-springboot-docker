@@ -1,0 +1,24 @@
+version: "3"
+services:
+  app-spring-boot-docker:
+    container_name: app-spring
+    image: app-spring-boot-docker
+    build: .
+    ports:
+      - "8081:8080"
+    environment:
+      MYSQL_HOST: mysqldb
+      MYSQL_USER: root
+      MYSQL_PASSWORD: 1234
+      MYSQL_PORT: 3306
+    depends_on:
+      - mysqldb
+
+  mysqldb:
+      container_name: mysqldb
+      image: mysql:8.0.34
+      ports:
+        - "3306:3306"
+      environment:
+        MYSQL_DATABASE: bd_prueba_docker
+        MYSQL_ROOT_PASSWORD: 1234
